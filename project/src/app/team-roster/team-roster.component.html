@@ -1,0 +1,17 @@
+<app-team-add-player (refresh)="appendPlayer($event)"></app-team-add-player>
+<div>
+  <table border=1>
+    <tr>
+      <td>Player name</td>
+      <td>Preferred Position</td>
+      <td>Actions</td>
+    </tr>
+    <tr *ngFor="let player of players">
+      <td>{{player.name}}</td>
+      <td>{{player.pref_position}}</td>
+      <td>
+        <button (click)="deletePlayer(player._id)">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>

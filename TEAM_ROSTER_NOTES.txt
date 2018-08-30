@@ -1,0 +1,69 @@
+***Read up on projections in mongoDB "project fields from query results"
+Models:
+
+  CURRENT MODELLING:
+
+    Player
+      name: string
+      preferred position: string , optional
+      status: Object{
+        Game/game_id: Game Object or string
+        status: string
+      }
+
+    Game
+      time: Date
+      location: Object{
+        club/city: string
+        field: string
+      }
+
+    DRILL (STRETCH)
+      drill_name: string
+      time: datetime
+    
+    Team (stretch)
+      teamName: string , min 2 chars
+      players: Player[]
+
+Views:
+  Global?
+    Nav Bar - make this float
+  Team List
+    list of players
+    add a player - could be a better testbed for making an element snap/unsnap based on scrolling
+  Game Page
+    //should this component be split?
+    Functionality:
+      Add Game
+      Game Selection (game 1, game 2, etc.)
+      player list per game
+        status for each player per game: Starting, Benched, Undecided
+          No more than max # players Starting! (flex)
+    Methods: //delete this once you have it in code!!!!
+      getGames() //get list of all games
+      getPlayers() //get list of players, might pull this data from parent component
+      selectGame() //set currentGame variable
+      addGame(datetime, club, field)
+        //create new game
+        //for each player, add the game to their status list, set status to "undecided"
+        //update gameList!
+      changeStatus(player, status) //alter player status, match by currentGame
+    Variables: //delete this once you have it in code!!!
+      playerList: Player[] //might pull this from parent
+      gameList: Game[]
+      currentGame: Game //used to select what info to display
+
+
+Desired Features:
+
+  Put these in a test component to start:
+    pop an element of the DOM and make it float when it would scroll offscreen
+      try doing this with an image
+    Do the same for a small element (button) without disturbing it's neighbors
+    incorporate streaming video
+      replace above image with video
+
+  Stretch goals:
+    incorporate login/reg and session
+    include drill performance via timed completion
