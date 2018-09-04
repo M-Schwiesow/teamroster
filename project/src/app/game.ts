@@ -1,8 +1,7 @@
 export class Game {
   _id: String;
   time: Date;
-  location: {
-    club: String,
-    field: String
-  };
+  club: String;
+  field: String;
+  player_status: Array<Object>;
 }

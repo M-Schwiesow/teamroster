@@ -6,10 +6,6 @@ Models:
     Player
       name: string
       preferred position: string , optional
-      status: Object{
-        Game/game_id: Game Object or string
-        status: string
-      }
 
     Game
       time: Date
@@ -17,6 +13,11 @@ Models:
         club/city: string
         field: string
       }
+      player_status {Object}[] //no object array in javascript?
+        {
+          player_name: string,
+          status: string //starting, benched, undecided
+        }
 
     DRILL (STRETCH)
       drill_name: string
@@ -33,7 +34,10 @@ Views:
     list of players
     add a player - could be a better testbed for making an element snap/unsnap based on scrolling
   Game Page
-    //should this component be split?
+    //Split this component:
+      TeamGameComp
+        -GameNewComp
+        -GameDisplayComp
     Functionality:
       Add Game
       Game Selection (game 1, game 2, etc.)
@@ -67,3 +71,35 @@ Desired Features:
   Stretch goals:
     incorporate login/reg and session
     include drill performance via timed completion
+
+Player status in game feels needlessly complicated -_-
+So, with current modelling:
+  New Game:
+    create Game object, send to server
+    construct array of player_status objects
+    set Game.player_status, send to DB
+    pass new game back to client on success
+  Delete Game:
+    toss in trash, live the good life
+  New Player:
+    create Player object, send to server
+    save Player to DB
+    //can we do the below after sending a response to the user?
+    //would be nice.
+    construct array of games and a player_status object
+    add player_status object to each Game in array
+    update games in DB
+  Delete Player:
+    send Player id to server
+    retrieve Player from DB
+    construct array of games
+    remove player_status entries where Player matches
+    save games
+
+Big Ugly To Do List:
+  oh my goodness put proper validations in please.
+  make all html look less like garbage
+  add cross-browser support on datetime field for new game from
+    handy-dandy notebook: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
+  also standardize times, convert to local for client.
+    further reading required

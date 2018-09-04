@@ -18,7 +18,7 @@ export class RosterService {
   }
 
   newPlayer(data){
-    console.log(data);
+    console.log("RosterService.newPlayer data:", data);
     return this._http.post('/roster', data);
   }
 
@@ -31,6 +31,7 @@ export class RosterService {
     return this._http.delete(`/roster/${id}`);
   }
 
+
   //game methods
   getAllGames(){
     return this._http.get('/game');
@@ -41,7 +42,7 @@ export class RosterService {
   }
 
   newGame(data){
-    console.log("or is it new game+?", data);
+    console.log("RosterService.newGame data:", data);
     return this._http.post('/game', data);
   }
 

@@ -1,3 +1,45 @@
-<p>
-  team-game works!
-</p>
+<fieldset>
+  <legend>Schedule a Game</legend>
+  <form (ngSubmit)="newGame()">
+    <!--should integrate cross-browser support on this date field-->
+    <!--also consider standardizing the time data, converting to local as desired-->
+    <p>Game Time: <input type="datetime-local" name="gameForm.time" [(ngModel)]="gameForm.time"></p>
+    <p>Club: <input type="text" name="gameForm.club" [(ngModel)]="gameForm.club"></p>
+    <p>Field: <input type="text" name="gameForm.field" [(ngModel)]="gameForm.field"></p>
+    <button type="button" (click)="clearForm()">Clear</button>
+    <input type="submit" value="Submit">
+  </form>
+  <div *ngIf="errors">
+    <p *ngFor="let error of errors">{{error}}</p>
+  </div>
+</fieldset>
+
+<div *ngIf="games">
+
+  <div>
+    <h1>Upcoming Games</h1>
+    <select (change)="setGame($event)">
+      <option *ngFor="let game of games" value="{{game._id}}">{{game.time | date:"MM d h:mm a"}}</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedGame">
+    <h3>{{selectedGame.time | date:"M/d h:mm a"}} @ {{selectedGame.club}}<span *ngIf="selectedGame.field">, field {{selectedGame.field}}</span></h3>
+    <table border=1>
+      <tr>
+        <th>Player</th>
+        <th>Player Status</th>
+      </tr>
+    <!-- wanted to use ngFor on selectedGame.status.
+    ngFor is giving fits, stripping it out for a moment-->
+    <tr *ngFor="let _status of selectedGame.player_status">
+      <td>{{_status.player.name}}</td>
+      <!-- time for one magical method, based on content of status.status... bad naming convention, sir. -->
+      <td>
+        {{_status.status}}
+      </td>
+    </tr>
+    </table>
+  </div>
+
+</div>

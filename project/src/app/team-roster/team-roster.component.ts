@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RosterService } from '../roster.service';
-import { Player } from './../player';
+import { Player } from '../player';
 
 @Component({
   selector: 'app-team-roster',
@@ -9,17 +9,21 @@ import { Player } from './../player';
 })
 export class TeamRosterComponent implements OnInit {
 
-  players: Player[]; //obviously we will change this once we have our modelling set.
-
+  players: Player[]; 
+  
   constructor(private rosterService: RosterService) { }
 
   ngOnInit() {
     this.getAll();
   }
-
+  //see notes for delete player process
   deletePlayer(id: String){
     console.log("TeamRosterComponent: deletePlayer()", id);
-    this.rosterService.removePlayer(id);
+    let obs = this.rosterService.removePlayer(id);
+    obs.subscribe(data =>{
+      console.log("response in deletePlayer", data.toString);
+      this.getAll();
+    })
   }
 
   getAll(){

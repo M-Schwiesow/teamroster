@@ -10,7 +10,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname + '/project/dist/project')));
 
-
 require('./server/config/mongoose');
 
 require('./server/config/routes')(app);

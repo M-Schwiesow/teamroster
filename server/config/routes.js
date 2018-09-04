@@ -3,6 +3,18 @@ const games = require('./../controllers/games');
 const path = require('path');
 
 module.exports = (app) => {
+
+  app.all('*', function(req,res,next){
+    console.log("Incoming request information:");
+    console.log("req.method: ",req.method);
+    console.log("req.originalUrl: ",req.originalUrl);
+    console.log("req.params: ",req.params);
+    console.log("req.body: ",req.body);
+    console.log("req.rawHeaders: ",req.rawHeaders);
+    console.log("*******endlog*********");
+    next();
+  });
+
   //player routes
   app.get('/roster', players.getAllPlayers),
 
@@ -17,7 +29,7 @@ module.exports = (app) => {
   //game routes
   app.get('/game', games.getAllGames),
 
-  app.get('/game/:id', games.getGame), //app got game.  I'll see myself out.
+  app.get('/game/:id', games.getGame),
 
   app.post('/game', games.addGame),
 

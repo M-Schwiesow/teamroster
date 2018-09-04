@@ -2,14 +2,16 @@
   <fieldset>
     <legend>Add Player</legend>
       <form (submit)="newPlayer()">
-        <p>Player name:</p>
-        <input type="text" name="player.name" [(ngModel)]="player.name">
-        <p>Preferred Position:</p>
-        <input type="text" name="player.pref_position" [(ngModel)]="player.pref_position">
+        <p>Player name: 
+          <input type="text" name="player.name" [(ngModel)]="player.name">
+        </p>
+        <p>Preferred Position: 
+          <input type="text" name="player.pref_position" [(ngModel)]="player.pref_position">
+        </p>
         <br>
+        <button type="button" (click)="clearForm()">Clear</button>
         <input type="submit" value="Create">
       </form>
-      <button (click)="clearForm()">Clear</button>
       <div *ngIf="errors">
         <p *ngFor='let error of errors'>{{error}}</p>
       </div>

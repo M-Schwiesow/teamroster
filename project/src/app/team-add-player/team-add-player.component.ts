@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { RosterService } from '../roster.service';
 import { Player } from '../player';
 
@@ -20,18 +20,15 @@ export class TeamAddPlayerComponent implements OnInit {
   }
 
   /*So, concerns.  When a player is created we want to
-  make sure they're up-to-date.  We'll want to pull a list of
-  all games and place them on the player's status.  Eventually do
-  the same for drills.  Worth noting we could do this on
-  the server instead.*/
+  make sure they're up-to-date.
+  Altered the process, check notes for new player process.*/
   newPlayer(){
-    this.player.status
     this.rosterService.newPlayer(this.player).subscribe((response)=>{
       console.log(response);
       if(response['message'] === 'error'){
         this.errors = response['errors'];
       } else {
-        //update status w/ loop here.  oh.  that takes another hit on the server.  we're doing it on the server.
+        //send the new player to parent to be appended to player list, clear form
         this.refresh.emit(response as Player);
         this.player = new Player;
       }
