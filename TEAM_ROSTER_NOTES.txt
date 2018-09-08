@@ -99,7 +99,7 @@ So, with current modelling:
 Big Ugly To Do List:
   oh my goodness put proper validations in please.
   make all html look less like garbage
-  add cross-browser support on datetime field for new game from
+  add cross-browser support on datetime field for new game form
     handy-dandy notebook: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/datetime-local
   also standardize times, convert to local for client.
     further reading required
