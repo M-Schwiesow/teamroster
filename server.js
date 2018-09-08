@@ -15,6 +15,6 @@ require('./server/config/mongoose');
 require('./server/config/routes')(app);
 
 app.listen(PORT, function(){
-  console.log("I am logging from the master!!!");
+  //did not keep either log.
   console.log(`Server ready to rock on port ${PORT}.`);
 });
