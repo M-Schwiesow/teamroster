@@ -24,17 +24,24 @@ module.exports = {
     });
   },
 
-  //need to pull current players and add them to the game
+ 
   addGame: function(req,res) {
     console.log("addGame found, req.body:");
     console.log(req.body);
     const _game = req.body;
+    //need to pull current players and add them to the game
     Player.find({}, function(err,players){
       if(err){
         console.log("error finding players in addGame",err);
         //and next?  we want to register our players to the game!
       } else {
         _game.player_status = [];
+        //for grins, you could probably use this Array.from method to create
+        //your array from the list of players.
+        //something like _game.player_status = Array.from(players, (v, i) => {
+          // hmm, breaks down here.  have to look up the syntax
+        // });
+        // console.log(Array.from({length: 5}, (v,i=1) => i+1));
         //add each player to the new game's status
         for(let player of players){
           _game.player_status.push({ "player" : player, "status" : "absent" });
@@ -54,7 +61,7 @@ module.exports = {
         game.player_status = _game.player_status; //had to do this, mongoose was not looking into the array.  learn more.
         game.markModified("player_status");
         game.save();
-        console.log("Hypothetical success in addGame, game obj:");
+        console.log("success in addGame, game obj:");
         console.log(game);
         res.json(game);
       }
