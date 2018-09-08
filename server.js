@@ -15,5 +15,6 @@ require('./server/config/mongoose');
 require('./server/config/routes')(app);
 
 app.listen(PORT, function(){
+  console.log("Logging on branch!!!");
   console.log(`Server ready to rock on port ${PORT}.`);
 });
