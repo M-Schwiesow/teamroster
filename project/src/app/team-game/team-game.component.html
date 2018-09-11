@@ -19,24 +19,25 @@
   <div>
     <h1>Upcoming Games</h1>
     <select (change)="setGame($event)">
-      <option *ngFor="let game of games" value="{{game._id}}">{{game.time | date:"MM d h:mm a"}}</option>
+      <option *ngFor="let game of games" value="{{game._id}}">{{game.time | date:"MM/d h:mm a"}} - {{game.club}}</option>
     </select>
   </div>
 
   <div *ngIf="selectedGame">
+
     <h3>{{selectedGame.time | date:"M/d h:mm a"}} @ {{selectedGame.club}}<span *ngIf="selectedGame.field">, field {{selectedGame.field}}</span></h3>
+    
     <table border=1>
       <tr>
         <th>Player</th>
         <th>Player Status</th>
       </tr>
-    <!-- wanted to use ngFor on selectedGame.status.
-    ngFor is giving fits, stripping it out for a moment-->
-    <tr *ngFor="let _status of selectedGame.player_status">
+    <tr *ngFor="let _status of selectedGame.player_status; let i = index">
       <td>{{_status.player.name}}</td>
-      <!-- time for one magical method, based on content of status.status... bad naming convention, sir. -->
       <td>
-        {{_status.status}}
+        <button (click)="setPlayerStatus(i, 'starting')" [class.starting-active]="_status.status == 'starting'">starting</button>
+        <button (click)="setPlayerStatus(i, 'benched')" [class.benched-active]="_status.status == 'benched'">benched</button>
+        <button (click)="setPlayerStatus(i, 'absent')" [class.absent-active]="_status.status == 'absent'">absent</button>
       </td>
     </tr>
     </table>

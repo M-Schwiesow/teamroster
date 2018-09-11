@@ -33,6 +33,8 @@ module.exports = (app) => {
 
   app.post('/game', games.addGame),
 
+  app.put('/game/:id', games.editGame),
+
   app.delete('/game/:id', games.deleteGame),
 
   app.all('*', (req, res, next) => {

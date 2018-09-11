@@ -1,0 +1,12 @@
+.starting-active{
+  background-color: green;
+}
+
+.benched-active{
+  background-color: royalblue;
+  color: lightgray;
+}
+
+.absent-active{
+  background-color: yellow;
+}
