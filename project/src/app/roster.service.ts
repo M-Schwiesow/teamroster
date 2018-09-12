@@ -46,6 +46,11 @@ export class RosterService {
     return this._http.post('/game', data);
   }
 
+  editGame(id: String, data){
+    console.log("RosterService.editGame data:", data);
+    return this._http.put(`/game/${id}`, data);
+  }
+
   removeGame(id: String){
     return this._http.delete(`/game/${id}`);
   }

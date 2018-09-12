@@ -68,6 +68,23 @@ module.exports = {
     });
   },
 
+  editGame: function(req,res) {
+    Game.findByIdAndUpdate(req.params.id, req.body, (err, game) =>{
+      if(err){
+        let errors=[];
+        for(let index in err.errors){
+          errors.push(err.errors[index].message);
+        }
+        console.log("errors from editGame:", errors);
+        res.json({message: 'error', errors: errors});
+      } else {
+        console.log("success in editGame, game obj:");
+        console.log(game);
+        res.json(game);
+      }
+    })
+  },
+
   deleteGame: function(req,res) {
     console.log("deleteGame found, req.params:", req.params);
     Game.deleteOne({_id: req.params.id}, (err) =>{

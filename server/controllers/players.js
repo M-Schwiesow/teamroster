@@ -37,10 +37,7 @@ module.exports = {
         } else { //on success, send response to client and begin a magical journey to register the player for all games.
 
           res.json(player);
-          // const base_status = {
-          //   "player" : player,
-          //   "status" : "absent"
-          // }
+
           /*
             BEWARE: mongoose cannot track changes to an array and will not save said changes.
             use .markModified('<attributeName>') before saving .save()
@@ -53,12 +50,9 @@ module.exports = {
               console.log("find game error in addPlayer", err);
             } else {
               console.log("success on Game.find in addPlayer, tracking");
-              console.log("I only want to long the change once....");
               //attempting to add the player to status array
               games.forEach(function(game){
-                console.log("game.player_status before:", game.player_status.length);
                 game.player_status.push({"player" : player , "status" : "absent"});
-                console.log("game.player_status after:", game.player_status.length);
                 game.markModified("player_status");
                 //okay, this works but it made the server chug a bit.  gotta be a better way, eh?
                 game.save(function(err,response){

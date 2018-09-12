@@ -97,6 +97,8 @@ So, with current modelling:
     save games
 
 Big Ugly To Do List:
+  Fix up and populate selectedGame OnInit in TeamGameComponent
+  Split TeamGameComponent: NewGameForm --- DisplayGameDetail
   oh my goodness put proper validations in please.
   make all html look less like garbage
   add cross-browser support on datetime field for new game form
